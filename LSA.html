@@ -1,0 +1,2588 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Topic Modelling pada Web Mining &#8212; My sample book</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="SOAL UAS" href="TFIDF.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Selamat Datang di Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="TFIDF.html">
+   SOAL UAS
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Topic Modelling pada Web Mining
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/LSA.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FLSA.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/LSA.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pengertian-web-mining">
+   1. Pengertian Web Mining
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pengertian-data-crawling">
+   2. Pengertian Data Crawling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preprocessing-data">
+   3. Preprocessing Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-module">
+     1. Import Module
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#memuat-dataset">
+     2. Memuat Dataset
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cleaning-data-dan-preprocessing-data">
+     3. Cleaning Data dan Preprocessing Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mengekstraksi-fitur-dan-membuat-document-term-matrix-dtm">
+     4. Mengekstraksi Fitur dan Membuat Document Term Matrix (DTM)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#topic-modelling">
+   4. Topic Modelling
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#latent-semantic-analysis-lsa">
+     1. Latent Semantic Analysis (LSA)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#latent-dirichlet-allocation-lda">
+     2. Latent Dirichlet Allocation (LDA)
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Topic Modelling pada Web Mining</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pengertian-web-mining">
+   1. Pengertian Web Mining
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pengertian-data-crawling">
+   2. Pengertian Data Crawling
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preprocessing-data">
+   3. Preprocessing Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-module">
+     1. Import Module
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#memuat-dataset">
+     2. Memuat Dataset
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cleaning-data-dan-preprocessing-data">
+     3. Cleaning Data dan Preprocessing Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mengekstraksi-fitur-dan-membuat-document-term-matrix-dtm">
+     4. Mengekstraksi Fitur dan Membuat Document Term Matrix (DTM)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#topic-modelling">
+   4. Topic Modelling
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#latent-semantic-analysis-lsa">
+     1. Latent Semantic Analysis (LSA)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#latent-dirichlet-allocation-lda">
+     2. Latent Dirichlet Allocation (LDA)
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="topic-modelling-pada-web-mining">
+<h1>Topic Modelling pada Web Mining<a class="headerlink" href="#topic-modelling-pada-web-mining" title="Permalink to this headline">#</a></h1>
+<p>Langkah-langkah:</p>
+<ol class="simple">
+<li><p>Crawling data</p></li>
+<li><p>Preprocessing data (Cleansing data dan stopword)</p></li>
+<li><p>Modelling LSA</p></li>
+</ol>
+<section id="pengertian-web-mining">
+<h2>1. Pengertian Web Mining<a class="headerlink" href="#pengertian-web-mining" title="Permalink to this headline">#</a></h2>
+<p><strong>Web Content Mining</strong> merupakan suatu proses otomatis untuk menemukan
+informasi yang berguna dari dokumen atau data. Pada prinsipnya teknik ini mengekstraksi kata kunci yang terkandung pada dokumen. Teknik Web Content Mining berfokus pada penggalian informasi dari isi (content) yang ada pada sebuah web, seperti teks, gambar, audio, video, metadata dan hyperlink. Ada dua strategi yang umum digunakan:</p>
+<ol class="simple">
+<li><p>Langsung melakukan mining terhadap data</p></li>
+<li><p>Melakukan pencarian serta mengimprove hasil pencarian seperti layaknya search engine (Srivastava et al, 2000).</p></li>
+</ol>
+<p>Web Content Mining juga dapat disebut sebagai Web Text Mining yang dalam implementasi biasanya penggalian data terletak pada daerah teks. Teknik ini juga lebih banyak berhubungan dengan disiplin information retrieval (IR), tetapi dengan inovasi yang terus menerus dan seiring dengan perkembangan dunia teknologi informasi, secara dramatis akan meningkatkan akurasi dalam analisis dan mampu menghemat biaya (Hermanto dan Sartono, _).</p>
+</section>
+<section id="pengertian-data-crawling">
+<h2>2. Pengertian Data Crawling<a class="headerlink" href="#pengertian-data-crawling" title="Permalink to this headline">#</a></h2>
+<p><strong>Data Crawling</strong> merupakan proses pengumpulan data sekunder yang mampu memilah informasi secara cepat dan otomatis tanpa ada reduplikasi data. Proses ini memiliki kaitan dengan data scraping. Begitu semua data telah terkumpul melalui crawling, data scraping akan mengeksekusinya.</p>
+<p>Dataset yang digunakan adalah hasil crawling data pada <strong>Portal Tugas Akhir Universitas Trunojoyo Madura</strong>. Dapat diakses melalui link <a class="reference external" href="https://pta.trunojoyo.ac.id/">https://pta.trunojoyo.ac.id/</a>.</p>
+<p>Berikut adalah kode program untuk proses crawling data yang menghasilkan sejumlah 93 data. Dengan rincian terdapat 7 kolom yaitu kolom Judul, Penulis, Pembimbing 1, Pembimbing 2, abstrak, Kata Kunci dan Label. Untuk pelabelan dilakukan secara manual.</p>
+<p>Untuk video tutorialnya dapat diakses pada link Youtube berikut <a class="reference external" href="https://youtu.be/uDeoJtYMbEU">https://youtu.be/uDeoJtYMbEU</a>.</p>
+</section>
+<section id="preprocessing-data">
+<h2>3. Preprocessing Data<a class="headerlink" href="#preprocessing-data" title="Permalink to this headline">#</a></h2>
+<p><strong>Data preprocessing</strong> merupakan proses yang mengubah data mentah ke dalam bentuk yang lebih mudah dipahami. Proses ini penting dilakukan karena data mentah sering kali tidak memiliki format yang teratur. Selain itu, data mining juga tidak dapat memproses data mentah, sehingga proses ini sangat penting dilakukan untuk mempermudah proses berikutnya, yakni analisis data.</p>
+<p>Langkah-langkah preprocessing data:</p>
+<ol class="simple">
+<li><p>Cleansing data</p></li>
+<li><p>Stopword</p></li>
+</ol>
+<section id="import-module">
+<h3>1. Import Module<a class="headerlink" href="#import-module" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># data visualisation and manipulation</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">style</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;stopwords&#39;</span><span class="p">)</span>
+<span class="c1">#configure</span>
+<span class="c1"># sets matplotlib to inline and displays graphs below the corressponding cell.</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline  
+<span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;fivethirtyeight&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;whitegrid&#39;</span><span class="p">,</span><span class="n">color_codes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1">#import nltk</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">word_tokenize</span><span class="p">,</span><span class="n">sent_tokenize</span>
+
+<span class="c1">#preprocessing</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>  <span class="c1">#stopwords</span>
+<span class="kn">from</span> <span class="nn">nltk</span> <span class="kn">import</span> <span class="n">word_tokenize</span><span class="p">,</span><span class="n">sent_tokenize</span> <span class="c1"># tokenizing</span>
+<span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">PorterStemmer</span><span class="p">,</span><span class="n">LancasterStemmer</span>  <span class="c1"># using the Porter Stemmer and Lancaster Stemmer and others</span>
+<span class="kn">from</span> <span class="nn">nltk.stem.snowball</span> <span class="kn">import</span> <span class="n">SnowballStemmer</span>
+<span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">WordNetLemmatizer</span>  <span class="c1"># lammatizer from WordNet</span>
+
+<span class="c1"># for named entity recognition (NER)</span>
+<span class="kn">from</span> <span class="nn">nltk</span> <span class="kn">import</span> <span class="n">ne_chunk</span>
+
+<span class="c1"># vectorizers for creating the document-term-matrix (DTM)</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span><span class="p">,</span><span class="n">CountVectorizer</span>
+
+<span class="c1">#stop-words</span>
+<span class="n">stop_words</span><span class="o">=</span><span class="nb">set</span><span class="p">(</span><span class="n">nltk</span><span class="o">.</span><span class="n">corpus</span><span class="o">.</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;indonesian&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package stopwords to C:\Users\Windows
+[nltk_data]     10\AppData\Roaming\nltk_data...
+[nltk_data]   Package stopwords is already up-to-date!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="memuat-dataset">
+<h3>2. Memuat Dataset<a class="headerlink" href="#memuat-dataset" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;dataset.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">54</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Dokumen</th>
+      <th>abstrak</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Tujuan penelitian ini adalah untuk mengidentif...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Tujuan penelitian ini adalah mendeskripsikan i...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>PLN merupakan Badan Usaha Milik Negara yang be...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Penelitian ini mengungkapkan beberapa rumusan ...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>Haryono Arifin, Pengaruh Perilaku Konsumen Ter...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>Hasil dari penelitian ini dari perhitungan Cre...</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>Dharma Abidin Syah,Kesimpulan: (1) Terdapat pe...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>Tujuan penelitian ini adalah untuk mengidentif...</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>Penelitian ini menggunakan metode kuantitatif,...</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>Aplikasi nyata pemanfaatan teknologi informasi...</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>Penelitian ini bertujuan untuk mengukur efekti...</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>Ali Rahbini, Pengaruh Harga dan Kualitas Pelay...</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>15</td>
+      <td>Bauran eceran merupakan salah satu langkah pem...</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>16</td>
+      <td>Tujuan penelitian ini adalah mengetahui pengar...</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>17</td>
+      <td>Ulfiyatun Mutohharoh, “Analisis Faktor-faktor ...</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>18</td>
+      <td>Tujuan penelitian ini adalah untuk menganalisi...</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>19</td>
+      <td>Tujuan penlitian ini adalah (1) untuk mengetah...</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>20</td>
+      <td>Tujuan penelitian ini adalah (1) untuk mengeta...</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>21</td>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>22</td>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>23</td>
+      <td>Tujuan penelitian ini adalah (1) untuk mengeta...</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>24</td>
+      <td>Penelitian ini bertujuan untuk mengetahui peng...</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>25</td>
+      <td>Tujuan penelitian ini adalah untuk mengidentif...</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>26</td>
+      <td>Anissa Novianti. 090211100010. Pengaruh Atribu...</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>27</td>
+      <td>Tujuan penelitian ini adalah untuk : (1) menge...</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>28</td>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>29</td>
+      <td>Muzanni, Peranan Manajemen Piutang tertahadap ...</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>30</td>
+      <td>KUSNIYAH, Analisis Volume Perdagangan Saham da...</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>31</td>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>32</td>
+      <td>Muhammad Sholeh, Pengaruh Iklan Di Televisi Te...</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>33</td>
+      <td>Tujuan dari penelitian ini adalah untuk menget...</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>34</td>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>35</td>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>36</td>
+      <td>Diana Agustini Dewi, 2013. “Analisis Kinerja K...</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>37</td>
+      <td>Pengaruh Bundling Strategy Terhadap Keputusan ...</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>38</td>
+      <td>Pendekatan penelitian yang digunakan dalam pen...</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>39</td>
+      <td>Kenaikan harga yang terlalu tinggi, akan menye...</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>40</td>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>41</td>
+      <td>Intention of this research is to know influenc...</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>42</td>
+      <td>Objek penelitian ini adalah pembelian produk X...</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>43</td>
+      <td>Penelitian ini bertujuan untuk mengetahui peng...</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>44</td>
+      <td>Munculnya asumsi bahwa lahirnya budaya mengemi...</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>45</td>
+      <td>USWATUN KHASANAH, “Pengaruh Etos Kerja Terhada...</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>46</td>
+      <td>Penelitian ini bertujuan untuk meneliti apakah...</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>47</td>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>48</td>
+      <td>Atribut produk memberikan pandangan atau gamba...</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>49</td>
+      <td>Habibah, “Pengaruh Ekuitas Merek Terhadap Kepu...</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>50</td>
+      <td>Hening Ary Putra, Pengaruh Iklan Online Melalu...</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>51</td>
+      <td>Penelitian ini bertujuan untuk mengetahui peng...</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>52</td>
+      <td>Satiyah, Pengaruh Faktor-faktor Pelatihan dan ...</td>
+    </tr>
+    <tr>
+      <th>52</th>
+      <td>53</td>
+      <td>Aththaariq, Pengaruh Kompetensi Dosen Terhadap...</td>
+    </tr>
+    <tr>
+      <th>53</th>
+      <td>54</td>
+      <td>Suatu keputusan investasi selalu berhubungan d...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Hanya kolom <strong>‘abstrak’</strong> yang akan diproses.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># drop the publish date.</span>
+<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Dokumen&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">54</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>abstrak</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Tujuan penelitian ini adalah untuk mengidentif...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Tujuan penelitian ini adalah mendeskripsikan i...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>PLN merupakan Badan Usaha Milik Negara yang be...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Penelitian ini mengungkapkan beberapa rumusan ...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Haryono Arifin, Pengaruh Perilaku Konsumen Ter...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Hasil dari penelitian ini dari perhitungan Cre...</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Dharma Abidin Syah,Kesimpulan: (1) Terdapat pe...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Tujuan penelitian ini adalah untuk mengidentif...</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Penelitian ini menggunakan metode kuantitatif,...</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Aplikasi nyata pemanfaatan teknologi informasi...</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Penelitian ini bertujuan untuk mengukur efekti...</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Ali Rahbini, Pengaruh Harga dan Kualitas Pelay...</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Bauran eceran merupakan salah satu langkah pem...</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Tujuan penelitian ini adalah mengetahui pengar...</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Ulfiyatun Mutohharoh, “Analisis Faktor-faktor ...</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Tujuan penelitian ini adalah untuk menganalisi...</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Tujuan penlitian ini adalah (1) untuk mengetah...</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Tujuan penelitian ini adalah (1) untuk mengeta...</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Tujuan penelitian ini adalah (1) untuk mengeta...</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Penelitian ini bertujuan untuk mengetahui peng...</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Tujuan penelitian ini adalah untuk mengidentif...</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Anissa Novianti. 090211100010. Pengaruh Atribu...</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Tujuan penelitian ini adalah untuk : (1) menge...</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>Muzanni, Peranan Manajemen Piutang tertahadap ...</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>KUSNIYAH, Analisis Volume Perdagangan Saham da...</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>Muhammad Sholeh, Pengaruh Iklan Di Televisi Te...</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>Tujuan dari penelitian ini adalah untuk menget...</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>Diana Agustini Dewi, 2013. “Analisis Kinerja K...</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>Pengaruh Bundling Strategy Terhadap Keputusan ...</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>Pendekatan penelitian yang digunakan dalam pen...</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>Kenaikan harga yang terlalu tinggi, akan menye...</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>Intention of this research is to know influenc...</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>Objek penelitian ini adalah pembelian produk X...</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>Penelitian ini bertujuan untuk mengetahui peng...</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>Munculnya asumsi bahwa lahirnya budaya mengemi...</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>USWATUN KHASANAH, “Pengaruh Etos Kerja Terhada...</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>Penelitian ini bertujuan untuk meneliti apakah...</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>Atribut produk memberikan pandangan atau gamba...</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>Habibah, “Pengaruh Ekuitas Merek Terhadap Kepu...</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>Hening Ary Putra, Pengaruh Iklan Online Melalu...</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>Penelitian ini bertujuan untuk mengetahui peng...</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>Satiyah, Pengaruh Faktor-faktor Pelatihan dan ...</td>
+    </tr>
+    <tr>
+      <th>52</th>
+      <td>Aththaariq, Pengaruh Kompetensi Dosen Terhadap...</td>
+    </tr>
+    <tr>
+      <th>53</th>
+      <td>Suatu keputusan investasi selalu berhubungan d...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="cleaning-data-dan-preprocessing-data">
+<h3>3. Cleaning Data dan Preprocessing Data<a class="headerlink" href="#cleaning-data-dan-preprocessing-data" title="Permalink to this headline">#</a></h3>
+<p>Proses ini merupakan preprocessing data dengan menggunakan lemmatizer dan bisa juga menggunakan stemmer. Melakukan stopword pada kata yang telah digunakan bersama dengan kata-kata dengan panjang lebih pendek dari 3 karakter untuk mengurangi beberapa kata yang menyimpang.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">clean_text</span><span class="p">(</span><span class="n">headline</span><span class="p">):</span>
+  <span class="n">le</span><span class="o">=</span><span class="n">WordNetLemmatizer</span><span class="p">()</span>
+  <span class="n">word_tokens</span><span class="o">=</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">headline</span><span class="p">)</span>
+  <span class="n">tokens</span><span class="o">=</span><span class="p">[</span><span class="n">le</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">word_tokens</span> <span class="k">if</span> <span class="n">w</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stop_words</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">3</span><span class="p">]</span>
+  <span class="n">cleaned_text</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">cleaned_text</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># time taking</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;wordnet&#39;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">)</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;omw-1.4&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;abstrak_cleaned_text&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;abstrak&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">clean_text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package wordnet to C:\Users\Windows
+[nltk_data]     10\AppData\Roaming\nltk_data...
+[nltk_data]   Package wordnet is already up-to-date!
+[nltk_data] Downloading package punkt to C:\Users\Windows
+[nltk_data]     10\AppData\Roaming\nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+[nltk_data] Downloading package omw-1.4 to C:\Users\Windows
+[nltk_data]     10\AppData\Roaming\nltk_data...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data]   Package omw-1.4 is already up-to-date!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">54</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>abstrak</th>
+      <th>abstrak_cleaned_text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Tujuan penelitian ini adalah untuk mengidentif...</td>
+      <td>Tujuan penelitian mengidentifikasi variabel-va...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+      <td>Tujuan penelitian pengaruh variabel Retailing ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Tujuan penelitian ini adalah mendeskripsikan i...</td>
+      <td>Tujuan penelitian mendeskripsikan inovasi keun...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>PLN merupakan Badan Usaha Milik Negara yang be...</td>
+      <td>Badan Usaha Milik Negara bergerak bidang penye...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Penelitian ini mengungkapkan beberapa rumusan ...</td>
+      <td>Penelitian rumusan pelaporan biaya kualitas me...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Haryono Arifin, Pengaruh Perilaku Konsumen Ter...</td>
+      <td>Haryono Arifin Pengaruh Perilaku Konsumen Terh...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Hasil dari penelitian ini dari perhitungan Cre...</td>
+      <td>Hasil penelitian perhitungan Credit Risk Ratio...</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Dharma Abidin Syah,Kesimpulan: (1) Terdapat pe...</td>
+      <td>Dharma Abidin Syah Kesimpulan Terdapat pengaru...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Tujuan penelitian ini adalah untuk mengidentif...</td>
+      <td>Tujuan penelitian mengidentifikasi variabel-va...</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Penelitian ini menggunakan metode kuantitatif,...</td>
+      <td>Penelitian metode kuantitatif menekankan pengu...</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+      <td>Tujuan penelitian persepsi brand association p...</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Aplikasi nyata pemanfaatan teknologi informasi...</td>
+      <td>Aplikasi nyata pemanfaatan teknologi informasi...</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Penelitian ini bertujuan untuk mengukur efekti...</td>
+      <td>Penelitian bertujuan mengukur efektivitas ikla...</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Ali Rahbini, Pengaruh Harga dan Kualitas Pelay...</td>
+      <td>Rahbini Pengaruh Harga Kualitas Pelayanan Terh...</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Bauran eceran merupakan salah satu langkah pem...</td>
+      <td>Bauran eceran salah langkah pemasaran keberhas...</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Tujuan penelitian ini adalah mengetahui pengar...</td>
+      <td>Tujuan penelitian pengaruh celebrity endorser ...</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Ulfiyatun Mutohharoh, “Analisis Faktor-faktor ...</td>
+      <td>Ulfiyatun Mutohharoh Analisis Faktor-faktor Me...</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Tujuan penelitian ini adalah untuk menganalisi...</td>
+      <td>Tujuan penelitian menganalisis atribut kualita...</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Tujuan penlitian ini adalah (1) untuk mengetah...</td>
+      <td>Tujuan penlitian variabel iklan berdasarkan ko...</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Tujuan penelitian ini adalah (1) untuk mengeta...</td>
+      <td>Tujuan penelitian harga kualitas produk berpen...</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+      <td>Tujuan penelitian pengaruh variabel kualitas p...</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+      <td>Tujuan penelitian pengaruh Bauran Pemasaran Pr...</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Tujuan penelitian ini adalah (1) untuk mengeta...</td>
+      <td>Tujuan penelitian pengaruh pesan iklan televis...</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Penelitian ini bertujuan untuk mengetahui peng...</td>
+      <td>Penelitian bertujuan pengaruh unsur unsur komu...</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Tujuan penelitian ini adalah untuk mengidentif...</td>
+      <td>Tujuan penelitian mengidentifikasi variabel-va...</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Anissa Novianti. 090211100010. Pengaruh Atribu...</td>
+      <td>Anissa Novianti 090211100010 Pengaruh Atribut ...</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Tujuan penelitian ini adalah untuk : (1) menge...</td>
+      <td>Tujuan penelitian pengaruh perilaku konsumen k...</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+      <td>Tujuan penelitian pengaruh strategi promosi pe...</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>Muzanni, Peranan Manajemen Piutang tertahadap ...</td>
+      <td>Muzanni Peranan Manajemen Piutang tertahadap R...</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>KUSNIYAH, Analisis Volume Perdagangan Saham da...</td>
+      <td>KUSNIYAH Analisis Volume Perdagangan Saham Ret...</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+      <td>Tujuan penelitian pengaruh variabel current ra...</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>Muhammad Sholeh, Pengaruh Iklan Di Televisi Te...</td>
+      <td>Muhammad Sholeh Pengaruh Iklan Televisi Terhad...</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>Tujuan dari penelitian ini adalah untuk menget...</td>
+      <td>Tujuan penelitian pengaruh variabel self effic...</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+      <td>Tujuan penelitian pengaruh variabel persepsi n...</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+      <td>Tujuan penelitian pengaruh variabel Relationsh...</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>Diana Agustini Dewi, 2013. “Analisis Kinerja K...</td>
+      <td>Diana Agustini Dewi 2013 Analisis Kinerja Keua...</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>Pengaruh Bundling Strategy Terhadap Keputusan ...</td>
+      <td>Pengaruh Bundling Strategy Terhadap Keputusan ...</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>Pendekatan penelitian yang digunakan dalam pen...</td>
+      <td>Pendekatan penelitian penelitian pendekatan ku...</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>Kenaikan harga yang terlalu tinggi, akan menye...</td>
+      <td>Kenaikan harga menyebabkan permintaan pembelia...</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+      <td>Tujuan penelitian tingkat kebangkrutan perusah...</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>Intention of this research is to know influenc...</td>
+      <td>Intention this research know influence locatio...</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>Objek penelitian ini adalah pembelian produk X...</td>
+      <td>Objek penelitian pembelian produk Kecamatan Ba...</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>Penelitian ini bertujuan untuk mengetahui peng...</td>
+      <td>Penelitian bertujuan pengaruh faktor-faktor st...</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>Munculnya asumsi bahwa lahirnya budaya mengemi...</td>
+      <td>Munculnya asumsi lahirnya budaya mengemis dise...</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>USWATUN KHASANAH, “Pengaruh Etos Kerja Terhada...</td>
+      <td>USWATUN KHASANAH Pengaruh Etos Kerja Terhadap ...</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>Penelitian ini bertujuan untuk meneliti apakah...</td>
+      <td>Penelitian bertujuan meneliti pendidikan pelat...</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>Tujuan penelitian ini adalah untuk mengetahui ...</td>
+      <td>Tujuan penelitian variabel kompensasi finansia...</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>Atribut produk memberikan pandangan atau gamba...</td>
+      <td>Atribut produk pandangan gambaran produk Deale...</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>Habibah, “Pengaruh Ekuitas Merek Terhadap Kepu...</td>
+      <td>Habibah Pengaruh Ekuitas Merek Terhadap Keputu...</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>Hening Ary Putra, Pengaruh Iklan Online Melalu...</td>
+      <td>Hening Putra Pengaruh Iklan Online Melalui Med...</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>Penelitian ini bertujuan untuk mengetahui peng...</td>
+      <td>Penelitian bertujuan pengaruh rekrutmen pengem...</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>Satiyah, Pengaruh Faktor-faktor Pelatihan dan ...</td>
+      <td>Satiyah Pengaruh Faktor-faktor Pelatihan Penge...</td>
+    </tr>
+    <tr>
+      <th>52</th>
+      <td>Aththaariq, Pengaruh Kompetensi Dosen Terhadap...</td>
+      <td>Aththaariq Pengaruh Kompetensi Dosen Terhadap ...</td>
+    </tr>
+    <tr>
+      <th>53</th>
+      <td>Suatu keputusan investasi selalu berhubungan d...</td>
+      <td>Suatu keputusan investasi berhubungan keuntung...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Dapat melihat perbedaan setelah penghapusan stopwords dan beberapa kata yang lebih pendek. Juga kata-kata telah dilemmatisasi seperti dalam ‘yang’, ‘dengan’, ‘adalah’, dll.</p>
+<p>Kemudian gunakan kolom yang belum diproses.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;abstrak&#39;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">54</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>abstrak_cleaned_text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Tujuan penelitian mengidentifikasi variabel-va...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Tujuan penelitian pengaruh variabel Retailing ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Tujuan penelitian mendeskripsikan inovasi keun...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Badan Usaha Milik Negara bergerak bidang penye...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Penelitian rumusan pelaporan biaya kualitas me...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Haryono Arifin Pengaruh Perilaku Konsumen Terh...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Hasil penelitian perhitungan Credit Risk Ratio...</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Dharma Abidin Syah Kesimpulan Terdapat pengaru...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Tujuan penelitian mengidentifikasi variabel-va...</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Penelitian metode kuantitatif menekankan pengu...</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Tujuan penelitian persepsi brand association p...</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Aplikasi nyata pemanfaatan teknologi informasi...</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Penelitian bertujuan mengukur efektivitas ikla...</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Rahbini Pengaruh Harga Kualitas Pelayanan Terh...</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>Bauran eceran salah langkah pemasaran keberhas...</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>Tujuan penelitian pengaruh celebrity endorser ...</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Ulfiyatun Mutohharoh Analisis Faktor-faktor Me...</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Tujuan penelitian menganalisis atribut kualita...</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Tujuan penlitian variabel iklan berdasarkan ko...</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Tujuan penelitian harga kualitas produk berpen...</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Tujuan penelitian pengaruh variabel kualitas p...</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Tujuan penelitian pengaruh Bauran Pemasaran Pr...</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>Tujuan penelitian pengaruh pesan iklan televis...</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Penelitian bertujuan pengaruh unsur unsur komu...</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Tujuan penelitian mengidentifikasi variabel-va...</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Anissa Novianti 090211100010 Pengaruh Atribut ...</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>Tujuan penelitian pengaruh perilaku konsumen k...</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>Tujuan penelitian pengaruh strategi promosi pe...</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>Muzanni Peranan Manajemen Piutang tertahadap R...</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>KUSNIYAH Analisis Volume Perdagangan Saham Ret...</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>Tujuan penelitian pengaruh variabel current ra...</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>Muhammad Sholeh Pengaruh Iklan Televisi Terhad...</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>Tujuan penelitian pengaruh variabel self effic...</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>Tujuan penelitian pengaruh variabel persepsi n...</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>Tujuan penelitian pengaruh variabel Relationsh...</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>Diana Agustini Dewi 2013 Analisis Kinerja Keua...</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>Pengaruh Bundling Strategy Terhadap Keputusan ...</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>Pendekatan penelitian penelitian pendekatan ku...</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>Kenaikan harga menyebabkan permintaan pembelia...</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>Tujuan penelitian tingkat kebangkrutan perusah...</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>Intention this research know influence locatio...</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>Objek penelitian pembelian produk Kecamatan Ba...</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>Penelitian bertujuan pengaruh faktor-faktor st...</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>Munculnya asumsi lahirnya budaya mengemis dise...</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>USWATUN KHASANAH Pengaruh Etos Kerja Terhadap ...</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>Penelitian bertujuan meneliti pendidikan pelat...</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>Tujuan penelitian variabel kompensasi finansia...</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>Atribut produk pandangan gambaran produk Deale...</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>Habibah Pengaruh Ekuitas Merek Terhadap Keputu...</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>Hening Putra Pengaruh Iklan Online Melalui Med...</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>Penelitian bertujuan pengaruh rekrutmen pengem...</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>Satiyah Pengaruh Faktor-faktor Pelatihan Penge...</td>
+    </tr>
+    <tr>
+      <th>52</th>
+      <td>Aththaariq Pengaruh Kompetensi Dosen Terhadap ...</td>
+    </tr>
+    <tr>
+      <th>53</th>
+      <td>Suatu keputusan investasi berhubungan keuntung...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Kita juga bisa melihat headline berita tertentu.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;abstrak_cleaned_text&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Tujuan penelitian mengidentifikasi variabel-variabel mempengaruhi minat ulang nasabah layanan Internet Banking parsial simultan Penelitian metode kuantitatif dimana populasi penelitian nasabah kota Bangkalan layanan Internet Banking diperoleh sampel responden diambil teknik purposive sampling Teknik analisis regresi linier berganda Hasil penelitian simultan pengaruh signifikan variabel bebas persepsi manfaat persepsi kemudahan keamanan ketersediaan fitur minat ulang internet banking parsial variabel bebas berpengaruh positif signifikan minat ulang layanan internet banking kecuali variabel persepsi kemudahan kecuali variabel persepsi kemudahan._x000D_Kata Kunci Persepsi Manfaat Persepsi Kemudahan Keamanan Ketersediaan Fitur Minat Ulang Menggunakan Internet Banking&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="mengekstraksi-fitur-dan-membuat-document-term-matrix-dtm">
+<h3>4. Mengekstraksi Fitur dan Membuat Document Term Matrix (DTM)<a class="headerlink" href="#mengekstraksi-fitur-dan-membuat-document-term-matrix-dtm" title="Permalink to this headline">#</a></h3>
+<p>Dalam DTM nilainya adalah nilai TFidf. Tentukan beberapa parameter dari vectorizer Tfidf. Beberapa poin penting:</p>
+<ol class="simple">
+<li><p>LSA umumnya diimplementasikan dengan nilai Tfidf di mana-mana dan bukan dengan Count Vectorizer.</p></li>
+<li><p>Max_features bergantung pada daya komputasi Anda dan juga pada eval. metrik (skor koherensi adalah metrik untuk model topik). Coba nilai yang memberikan evaluasi terbaik. metrik dan tidak membatasi kekuatan pemrosesan.</p></li>
+<li><p>Nilai default untuk min_df &amp; max_df bekerja dengan baik.</p></li>
+<li><p>Dapat mencoba nilai yang berbeda untuk ngram_range.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vect</span> <span class="o">=</span><span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="n">stop_words</span><span class="p">,</span><span class="n">max_features</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span> <span class="c1"># to play with. min_df,max_df,max_features etc...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vect_text</span><span class="o">=</span><span class="n">vect</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;abstrak_cleaned_text&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\users\windows 10\appdata\local\programs\python\python39\lib\site-packages\sklearn\feature_extraction\text.py:396: UserWarning: Your stop_words may be inconsistent with your preprocessing. Tokenizing the stop words generated tokens [&#39;baiknya&#39;, &#39;berkali&#39;, &#39;kali&#39;, &#39;kurangnya&#39;, &#39;mata&#39;, &#39;olah&#39;, &#39;sekurang&#39;, &#39;setidak&#39;, &#39;tama&#39;, &#39;tidaknya&#39;] not in stop_words.
+  warnings.warn(
+</pre></div>
+</div>
+</div>
+</div>
+<p>Sekarang kita dapat melihat kata-kata yang paling sering dan langka di headline berita berdasarkan skor idf. Semakin kecil nilainya; lebih umum adalah kata dalam berita utama.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">vect_text</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vect_text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(54, 1000)
+  (0, 493)	0.024788720857340563
+  (0, 99)	0.08266066359927063
+  (0, 424)	0.14978374265013697
+  (0, 718)	0.05865747546684801
+  (0, 201)	0.026755594906497916
+  (0, 321)	0.14978374265013697
+  (0, 450)	0.16532132719854126
+  (0, 418)	0.16532132719854126
+  (0, 434)	0.29956748530027394
+  (0, 528)	0.16532132719854126
+  (0, 703)	0.369666199272936
+  (0, 178)	0.08331313884998408
+  (0, 840)	0.060291245068693336
+  (0, 674)	0.024327006966820906
+  (0, 347)	0.02300508979993151
+  (0, 192)	0.032095799241023036
+  (0, 512)	0.034267199436138374
+  (0, 775)	0.033515722756047264
+  (0, 133)	0.026244625977839473
+  (0, 811)	0.030773882074133636
+  (0, 755)	0.04405472018704612
+  (0, 906)	0.06419159848204607
+  (0, 267)	0.05865747546684801
+  (0, 786)	0.032792610550839256
+  (0, 807)	0.030145622534346668
+  :	:
+  (53, 284)	0.03768929637237687
+  (53, 12)	0.08915749558628762
+  (53, 611)	0.03768929637237687
+  (53, 536)	0.04457874779314381
+  (53, 368)	0.09624082563347638
+  (53, 11)	0.1443612384502146
+  (53, 376)	0.09637467055502426
+  (53, 90)	0.04812041281673819
+  (53, 169)	0.04812041281673819
+  (53, 694)	0.09624082563347638
+  (53, 796)	0.24060206408369098
+  (53, 269)	0.04812041281673819
+  (53, 629)	0.04812041281673819
+  (53, 288)	0.0345953548104942
+  (53, 631)	0.02606199329557502
+  (53, 190)	0.04832847673226577
+  (53, 442)	0.02606199329557502
+  (53, 493)	0.01592754273259609
+  (53, 178)	0.026765672719794308
+  (53, 347)	0.029563005930345537
+  (53, 807)	0.019369522690572193
+  (53, 281)	0.0566131219428335
+  (53, 599)	0.0215349194289994
+  (53, 670)	0.038301164566482505
+  (53, 954)	0.01787544452705543
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">idf</span><span class="o">=</span><span class="n">vect</span><span class="o">.</span><span class="n">idf_</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dd</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">vect</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">(),</span> <span class="n">idf</span><span class="p">))</span>
+<span class="n">l</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">dd</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="p">(</span><span class="n">dd</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">)</span>
+<span class="c1"># print(l)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">l</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;penelitian&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;yamaha&#39;</span><span class="p">])</span>  <span class="c1"># police is most common and forecast is least common among the news headlines.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>penelitian yamaha
+1.037041271680349
+4.314186004672526
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\users\windows 10\appdata\local\programs\python\python39\lib\site-packages\sklearn\utils\deprecation.py:87: FutureWarning: Function get_feature_names is deprecated; get_feature_names is deprecated in 1.0 and will be removed in 1.2. Please use get_feature_names_out instead.
+  warnings.warn(msg, category=FutureWarning)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Oleh karena itu kita dapat melihat bahwa berdasarkan <strong>nilai idf</strong> , <strong>‘hasil’</strong> adalah kata <strong>paling sering</strong> sedangkan <strong>‘wisata’</strong> <strong>paling jarang</strong> muncul di antara abstrak.</p>
+</section>
+</section>
+<section id="topic-modelling">
+<h2>4. Topic Modelling<a class="headerlink" href="#topic-modelling" title="Permalink to this headline">#</a></h2>
+<p>Suatu metode pada  analisa penambangan teks untuk melakukan penemuan data-data teks yang tersembunyi dan menemukan hubungan antara teks yang satu dengan lainnya dari suatu corpus.</p>
+<ul class="simple">
+<li><p>Mengelompokkan data teks yang didasarkan pada topik tertentu.</p></li>
+<li><p>Ide-tema-pokok bahasan utama dalam suatu kumpulan teks.</p></li>
+</ul>
+<p>Diimplementasikan untuk :</p>
+<ul class="simple">
+<li><p>Mengetahui topik bahasan di media sosial</p></li>
+<li><p>Mengetahui topik penelitian</p></li>
+<li><p>Mengetahui topik yang dibahas dalam review produk, dll.</p></li>
+</ul>
+<p>Tugas pokok topik modelling :</p>
+<ul class="simple">
+<li><p>Menemukan topik dalam kumpulan teks (Corpus)</p></li>
+<li><p>Mengetahui proporsi topik dalam suatu dokumen</p></li>
+</ul>
+<p><strong>Topic</strong> mengandung  distribusi dari beberapa kosakata (term) yang bersifat tetap.</p>
+<p><strong>Dokumen</strong> mengandung proporsi topik-topik tertentu sesuai kata-kata yang terkandung di dalamnya.</p>
+<section id="latent-semantic-analysis-lsa">
+<h3>1. Latent Semantic Analysis (LSA)<a class="headerlink" href="#latent-semantic-analysis-lsa" title="Permalink to this headline">#</a></h3>
+<p>Pendekatan pertama yang saya gunakan adalah LSA. LSA pada dasarnya adalah dekomposisi nilai tunggal.</p>
+<p>SVD menguraikan DTM asli menjadi tiga matriks S=U.(sigma).(V.T). Di sini matriks U menunjukkan matriks topik-dokumen sedangkan (V) adalah matriks istilah-topik.</p>
+<p>Setiap baris dari matriks U(matriks term dokumen) adalah representasi vektor dari dokumen yang bersangkutan. Panjang vektor ini adalah jumlah topik yang diinginkan. Representasi vektor untuk suku-suku dalam data kami dapat ditemukan dalam matriks V (matriks istilah-topik).</p>
+<p>Jadi, SVD memberi kita vektor untuk setiap dokumen dan istilah dalam data kita. Panjang setiap vektor adalah k. Kemudian kita dapat menggunakan vektor-vektor ini untuk menemukan kata dan dokumen serupa menggunakan metode kesamaan kosinus.</p>
+<p>Kita dapat menggunakan fungsi truncatedSVD untuk mengimplementasikan LSA. Parameter n_components adalah jumlah topik yang ingin kita ekstrak.
+Model tersebut kemudian di fit dan ditransformasikan pada hasil yang diberikan oleh vectorizer.</p>
+<p>Terakhir perhatikan bahwa LSA dan LSI (I untuk pengindeksan) adalah sama dan yang terakhir hanya terkadang digunakan dalam konteks pencarian informasi.</p>
+<p>Rumus Singular Value Decomposition (SVD) :</p>
+<p><span class="math notranslate nohighlight">\(\begin{equation}
+A_{m n}=U_{m m} x S_{m n} x V_{n n}^{T}
+\end{equation}\)</span></p>
+<p>Rumus Cosine Similarity :</p>
+<p><span class="math notranslate nohighlight">\(\begin{equation}
+\cos \alpha=\frac{A \cdot B}{|A||B|}=\frac{\sum_{i=1}^{n} A_{i} X B_{i}}{\sqrt{\sum_{i=1}^{n}\left(A_{i}\right)^{2}} X \sqrt{\sum_{i=1}^{n}\left(B_{i}\right)^{2}}}
+\end{equation}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">TruncatedSVD</span>
+<span class="n">lsa_model</span> <span class="o">=</span> <span class="n">TruncatedSVD</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;randomized&#39;</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">lsa_top</span><span class="o">=</span><span class="n">lsa_model</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">vect_text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lsa_top</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lsa_top</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># (no_of_doc*no_of_topics)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 2.22205439e-01  3.31484170e-02 -6.88446178e-03 -1.91130077e-03
+   1.46697245e-01  6.07751944e-02 -4.74330930e-02  6.37953801e-02
+   1.74821215e-01  2.03419329e-01]
+ [ 4.91729114e-01 -1.10650134e-01  3.81853684e-02 -4.82043916e-02
+  -4.11572307e-02 -2.17620252e-03 -2.52934662e-01  1.36197441e-02
+  -2.92389153e-01  1.55162344e-01]
+ [ 1.01575336e-01  8.05718192e-02  6.56302810e-02 -2.61270190e-02
+  -2.29148074e-02 -8.86198260e-02  3.60287413e-02 -3.05559168e-02
+  -8.22681997e-03 -1.76442223e-01]
+ [ 2.50638413e-01  4.63417575e-01 -2.47894313e-01 -2.12858478e-01
+  -1.73334511e-01 -1.42854667e-02  1.77690680e-01 -2.36459107e-01
+   1.23549107e-02  1.33943418e-01]
+ [ 1.84864612e-01  1.24061014e-02  1.76728816e-01 -6.35861975e-02
+   1.37265052e-01 -1.13484212e-01  7.15622607e-02 -1.18547676e-01
+   6.79555520e-02 -2.95445927e-01]
+ [ 4.45003452e-01 -2.41998912e-01 -1.21733715e-02  2.85661701e-02
+  -1.40187124e-02 -2.68645196e-02  1.12840716e-01 -1.04721192e-02
+   4.59413896e-01  1.80629853e-01]
+ [ 5.55409444e-02  1.23399653e-01  1.86165432e-01  3.61234719e-02
+   1.22890483e-01 -2.07953338e-01  1.47744378e-02 -6.04507516e-02
+  -2.86026641e-02  1.70756430e-02]
+ [ 2.37259002e-01  3.49814217e-01 -2.34263359e-01 -1.59390724e-01
+  -1.45246610e-01 -4.69821081e-02 -5.99796148e-03 -1.66178590e-02
+  -2.64178212e-02  5.50714725e-02]
+ [ 3.83180576e-01  5.33712842e-04 -1.31537689e-02 -8.69038836e-02
+   3.43201550e-01  2.51853899e-01 -2.49198294e-01 -2.20975073e-01
+  -1.51722032e-01  1.34841385e-01]
+ [ 3.65339627e-01  3.37941127e-01 -1.60382226e-01 -8.57861119e-02
+   3.11988315e-02 -1.15855957e-01 -4.30673906e-01  3.65101352e-01
+   1.46645278e-01 -1.70476872e-01]
+ [ 1.39223492e-01  8.13750065e-03  1.54659942e-02  3.67756346e-02
+   1.52036180e-01  8.61676918e-02  9.41480406e-02  2.12261031e-02
+   1.79634494e-01  2.00677923e-01]
+ [ 1.52174931e-01  6.64698690e-02  2.09737928e-02 -1.01580047e-01
+   3.89898045e-01  2.68104326e-01  1.95093100e-01  9.19472533e-02
+  -1.80425295e-01 -1.87213061e-01]
+ [ 3.03730695e-01  1.50057237e-01 -8.59055572e-02  3.56683959e-01
+   1.31813192e-01  1.16626402e-01  5.09888307e-02  2.42409168e-01
+  -4.28058130e-03 -1.21079034e-01]
+ [ 3.07686707e-01 -2.25314488e-02  4.05217257e-02 -1.50597840e-01
+   2.56638115e-01  3.13849975e-01 -2.01625876e-01 -3.02840452e-01
+  -2.59041514e-01  1.28686047e-02]
+ [ 4.59364359e-01 -1.97030195e-01  7.25034391e-02 -8.45058582e-02
+  -1.43042637e-01 -4.01958819e-03 -8.87963710e-02 -1.91347385e-01
+  -2.95247673e-01 -2.22535479e-02]
+ [ 3.32235847e-01  6.36200596e-03 -2.93116267e-02  6.33376445e-02
+  -5.27155879e-02 -5.18811687e-02 -1.50221623e-02 -7.43452098e-02
+   9.49736500e-02 -1.81965687e-01]
+ [ 2.79813591e-01  3.34337094e-02 -3.45887299e-03 -1.93576455e-02
+   1.66058017e-01  1.06627827e-01  4.60656344e-01  3.46203611e-01
+  -1.88722208e-01 -1.26522372e-01]
+ [ 1.30982771e-01 -5.47657105e-02  4.72272509e-02 -1.98540050e-01
+   3.23451084e-01  1.86760729e-01  4.07443208e-02 -2.16895631e-01
+   1.89913698e-01 -3.29099646e-01]
+ [ 4.73147886e-01 -1.54131115e-01 -3.80455326e-02  2.29063140e-01
+  -8.97760981e-02 -7.84988452e-03  2.18948071e-02  2.94512949e-02
+  -5.56785169e-02  1.67429886e-01]
+ [ 5.03165822e-01 -1.88926652e-01  5.22273239e-02 -1.45608808e-01
+  -2.11193714e-02  3.39943329e-03 -3.72770256e-02  5.33392802e-02
+  -1.57753662e-01 -9.63363336e-02]
+ [ 2.59953218e-01  1.79906351e-02 -1.26880376e-02 -1.07282789e-01
+   2.79905406e-01  1.39770815e-01 -2.57166964e-01 -8.36763267e-02
+  -1.04262036e-01  1.26042151e-01]
+ [ 5.04430289e-01 -2.22802437e-01  7.72672826e-03 -7.04039840e-02
+  -2.82278940e-01 -1.58984219e-01 -2.53731571e-03 -2.27899587e-02
+  -2.05641332e-01 -2.21882613e-01]
+ [ 2.08954185e-01  1.04841823e-01 -1.12245627e-01  6.85717417e-01
+  -2.23170688e-03  2.06624462e-01 -6.62328855e-02 -2.35304644e-01
+   4.09882873e-02 -9.52940768e-02]
+ [ 2.63285873e-01  3.58662831e-01 -2.26195897e-01  3.06813333e-01
+  -7.88582366e-02  1.18928697e-01 -8.34840550e-03 -1.95817234e-01
+   7.26670996e-02 -9.00061198e-02]
+ [ 6.17104765e-01 -2.26056241e-01 -2.44064631e-02 -3.66393092e-02
+  -1.12711088e-01 -1.38284743e-01  1.52582671e-02  1.39662333e-01
+   7.88713192e-02  6.20890036e-02]
+ [ 3.43121500e-01 -1.99930401e-01 -8.97510593e-03  8.10868835e-03
+  -1.38303331e-01 -1.18597553e-01  1.23636685e-01  2.26755089e-02
+   1.04638233e-01 -1.33329624e-02]
+ [ 4.83418882e-01 -2.57031878e-01 -5.29837735e-03  5.34882366e-02
+  -4.69587817e-02 -2.33048681e-02  5.08620285e-02 -5.60588058e-02
+   2.14196762e-01  2.87172845e-01]
+ [ 4.38670437e-01 -8.91231319e-02  7.79168312e-03  5.82304611e-03
+  -1.01043945e-01 -1.21601790e-01 -1.33805765e-01  8.00183347e-02
+  -2.00854203e-01  8.66647578e-02]
+ [ 8.57859770e-02  5.54816597e-02  2.15692032e-02 -1.08405845e-02
+   6.21885153e-03 -4.36039451e-02  2.80138414e-02 -6.96382218e-02
+   6.02700150e-02 -9.16954293e-02]
+ [ 1.20752260e-01  2.53618441e-01  7.08412830e-01 -2.80687710e-02
+  -3.30536632e-01  3.60596762e-01 -1.82927586e-02  6.50204802e-02
+   8.79098305e-02  2.88401255e-02]
+ [ 1.96528870e-01  2.22369582e-01  3.29754494e-01  1.01660188e-01
+   2.08347062e-01 -3.92434061e-01 -4.98047634e-02 -8.54571599e-02
+  -8.21095632e-02  1.65930833e-01]
+ [ 2.96345183e-01  8.46716349e-02 -1.35095953e-01  6.78480979e-01
+  -5.54410091e-02  1.70347867e-01 -2.31682628e-02 -1.97162050e-01
+   5.63729806e-03 -1.32557575e-01]
+ [ 1.91023309e-01  1.59765188e-01 -6.89643900e-02 -5.59631346e-02
+   1.76752245e-01  1.14717706e-01  2.29835547e-01  2.82280033e-01
+  -2.42020171e-01 -2.54404564e-02]
+ [ 4.18008038e-01 -8.21872484e-02  4.43730779e-02 -2.33844260e-01
+   3.45057758e-01  2.26388448e-01  5.11303539e-02 -1.64582691e-01
+   2.40822025e-01 -1.03964921e-01]
+ [ 1.73933162e-01  5.16174878e-02 -4.02352778e-02  8.64257704e-03
+   6.54704483e-02  3.40928452e-03 -2.07601767e-01  5.46727887e-02
+  -3.04525704e-02  1.63012852e-01]
+ [ 1.32887103e-01  2.79608032e-01  4.59537951e-01  1.06045609e-01
+   2.03881562e-01 -3.40405396e-01  1.44070217e-01 -3.16418050e-02
+  -2.56481455e-02 -5.68491068e-03]
+ [ 2.21614252e-01 -5.48110805e-02 -5.19807975e-03  3.10617718e-02
+  -5.92940435e-02 -6.94261414e-02 -1.14067737e-03  9.05807654e-03
+   4.08247659e-02 -1.18676047e-03]
+ [ 2.06722410e-01  2.67785824e-01  3.45079174e-01  1.24263862e-01
+   2.49533280e-01 -4.30497622e-01 -5.97005664e-04 -1.40857966e-01
+  -3.75319515e-02  5.18545129e-02]
+ [ 1.52498279e-01  1.99233450e-01  6.50050313e-01 -6.75882263e-02
+  -3.72484896e-01  4.44335401e-01 -5.81325484e-02  8.26163902e-02
+   5.10336108e-02  6.83155836e-03]
+ [ 1.00927100e-01  2.32859028e-01  4.61929861e-01  8.28712972e-02
+   1.27496614e-01 -2.86167389e-01  1.27740908e-01 -1.09206055e-01
+   7.55412445e-03 -1.65521817e-02]
+ [ 2.24479003e-02  1.57582934e-02  5.44180780e-03  2.01961609e-02
+   5.30147161e-02  1.04140990e-02 -1.47881540e-02  1.79297603e-03
+  -2.14950009e-02  5.05405020e-02]
+ [ 5.98084251e-01 -2.40334326e-01  3.15064404e-04 -5.55002119e-02
+  -3.15913753e-01 -1.69217181e-01  4.60300240e-02 -7.31873280e-02
+  -1.97076027e-01 -1.97926688e-01]
+ [ 1.59210361e-01  2.95912760e-01 -1.64320777e-01 -9.79246774e-02
+  -7.69769741e-03  9.71730548e-02  3.37005294e-01 -3.95098111e-02
+  -1.09587363e-01  1.17089183e-01]
+ [ 9.93102371e-02  1.91961152e-02  1.04069471e-03 -2.00573313e-02
+   3.23631905e-02  2.74017451e-02  6.35299124e-02  3.22630311e-02
+   1.03202196e-01  2.07539164e-01]
+ [ 1.92618026e-01  4.41186299e-01 -2.71398094e-01 -2.24655207e-01
+  -2.45063795e-01 -2.15548826e-02  2.47164688e-01 -2.53639413e-01
+  -5.67730275e-02  1.30522922e-01]
+ [ 2.88387154e-01  3.25825370e-01 -1.49633498e-01 -1.30155300e-01
+  -6.71435133e-02 -6.87234308e-02 -1.93696550e-01  6.56174356e-02
+   1.06397178e-01 -3.63984578e-02]
+ [ 1.98672041e-01  2.80172309e-01 -1.16180765e-01 -1.28267287e-02
+   5.47559757e-02 -1.00744243e-01 -3.75403041e-01  3.85286457e-01
+   1.88153796e-01 -2.89274359e-01]
+ [ 4.45721072e-01 -2.99608635e-01  3.16208858e-02 -1.66388318e-01
+   1.89941266e-03 -5.00255893e-02  2.16280871e-01 -1.28638419e-01
+   3.92164696e-01 -2.88403837e-01]
+ [ 4.15363802e-01 -8.33385737e-02 -1.15117323e-02  5.60154281e-03
+   1.86911645e-01  5.14323042e-02  1.13821408e-02  2.13963323e-01
+   2.29166780e-01  3.73606745e-01]
+ [ 3.29637675e-01 -5.49168893e-02 -3.58662300e-02  2.44539220e-01
+   5.92031036e-02  9.37098117e-02  3.30584456e-01  3.36608643e-01
+  -1.98132820e-01  5.27494896e-02]
+ [ 1.99422919e-01  3.03466530e-01 -1.44131905e-01 -1.00052898e-01
+  -3.96016128e-02 -4.56038584e-02 -8.80587903e-02  1.82430445e-02
+   6.09866545e-02 -5.01695217e-02]
+ [ 2.08204928e-01  4.22078389e-01 -2.18938979e-01 -1.45874022e-01
+  -1.26414706e-01  3.77154396e-02  1.38454688e-01 -8.37539827e-02
+   9.71322239e-02  1.86559047e-02]
+ [ 1.73049613e-01  1.41938979e-01 -2.46328443e-02 -2.38017079e-02
+   1.18024750e-01  3.03698273e-03  4.89444569e-02  2.05304754e-01
+  -5.31293813e-02  1.47186005e-02]
+ [ 7.70305286e-02  1.45550499e-01  3.70823398e-01 -3.05882729e-02
+  -2.20517288e-01  2.80161507e-01 -3.66730235e-02  1.17647107e-01
+   7.86525015e-02 -5.50793716e-05]]
+(54, 10)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span><span class="o">=</span><span class="n">lsa_top</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Document 0 :&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">topic</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topic &quot;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot; : &quot;</span><span class="p">,</span><span class="n">topic</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Document 0 :
+Topic  0  :  22.220543942864566
+Topic  1  :  3.314841700717746
+Topic  2  :  -0.6884461775617652
+Topic  3  :  -0.1911300774105242
+Topic  4  :  14.66972451335648
+Topic  5  :  6.077519444028368
+Topic  6  :  -4.743309304564321
+Topic  7  :  6.379538009570711
+Topic  8  :  17.48212149690196
+Topic  9  :  20.341932946942826
+</pre></div>
+</div>
+</div>
+</div>
+<p>Mirip dengan dokumen lain kita bisa melakukan ini. Namun perhatikan bahwa nilai tidak menambah 1 seperti di LSA itu bukan kemungkinan topik dalam dokumen.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lsa_model</span><span class="o">.</span><span class="n">components_</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="c1"># (no_of_topics*no_of_words)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lsa_model</span><span class="o">.</span><span class="n">components_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10, 1000)
+[[ 0.00792718  0.00933611  0.0031642  ...  0.00386162  0.02434413
+   0.00382636]
+ [ 0.00019091  0.02311388  0.00960149 ... -0.00558516 -0.01029739
+  -0.00029652]
+ [-0.00446586 -0.0118894  -0.00419655 ...  0.00062145  0.0058631
+  -0.00014877]
+ ...
+ [-0.0030044   0.00286443  0.02186372 ... -0.00397603 -0.03408852
+   0.00996036]
+ [ 0.02651734  0.00797101  0.01096837 ...  0.01246708  0.05133031
+  -0.00432853]
+ [ 0.01065498 -0.00601598 -0.01851665 ... -0.01011288 -0.02414963
+  -0.00398135]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Proses untuk mendapatkan daftar kata-kata penting untuk masing-masing dari 10 topik seperti yang ditunjukkan. Untuk kesederhanaan di sini saya telah menunjukkan 10 kata untuk setiap topik.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># most important words for each topic</span>
+<span class="n">vocab</span> <span class="o">=</span> <span class="n">vect</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">comp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lsa_model</span><span class="o">.</span><span class="n">components_</span><span class="p">):</span>
+    <span class="n">vocab_comp</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">vocab</span><span class="p">,</span> <span class="n">comp</span><span class="p">)</span>
+    <span class="n">sorted_words</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">vocab_comp</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topic &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;: &quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">sorted_words</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+         
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Topic 0: 
+variabel keputusan pembelian produk penelitian berpengaruh konsumen harga merek bangkalan 
+
+Topic 1: 
+kerja karyawan perusahaan pengembangan pegawai kompensasi saham prestasi pesan produktivitas 
+
+Topic 2: 
+saham perusahaan split stock ratio return harga perbedaan akuisisi terdaftar 
+
+Topic 3: 
+pesan iklan konsumen kartu seluler langsung beli struktur televisi format 
+
+Topic 4: 
+kepuasan kualitas ratio pelayanan akademik pelanggan persepsi sepeda motor perusahaan 
+
+Topic 5: 
+saham kepuasan pesan split stock harga pelayanan kualitas akademik pelanggan 
+
+Topic 6: 
+kerja online faktor produk stressor trunojoyo madura universitas mahasiswa akademik 
+
+Topic 7: 
+kompensasi online langsung mahasiswa trunojoyo madura universitas finansial nilai kinerja 
+
+Topic 8: 
+merek motor honda persepsi sepeda kompensasi vario psikologis agung surya 
+
+Topic 9: 
+merek persepsi kerja variabel perilaku konsumen budaya cair indomilk susu 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="latent-dirichlet-allocation-lda">
+<h3>2. Latent Dirichlet Allocation (LDA)<a class="headerlink" href="#latent-dirichlet-allocation-lda" title="Permalink to this headline">#</a></h3>
+<p><strong>Latent Dirichlet Allocation</strong> merupakan model generatif yaitu model yang menghasilkan distribusi output dan input didasarkan pada variabel-variabel latent.</p>
+<p>LDA adalah teknik yang paling populer. Topik kemudian menghasilkan kata berdasarkan distribusi probabilitasnya. Mengingat kumpulan data dokumen, LDA mundur dan mencoba mencari tahu topik apa yang akan membuat dokumen tersebut di tempat pertama.</p>
+<p>Untuk memahami matematika sepertinya diperlukan pengetahuan tentang distribusi Dirichlet (distribusi distribusi) yang cukup rumit dan ditinggalkan untuk saat ini.</p>
+<p>Rumus LDA :</p>
+<p><span class="math notranslate nohighlight">\(\begin{equation}
+p(D \mid a, \beta)=\prod_{d=1}^{M} \int p\left(\theta_{\mathrm{d}} \mid \alpha\right)\left(\prod_{n=1}^{N_{\mathrm{d}}} \sum_{Z_{\mathrm{dn}}} p\left(Z_{\mathrm{dn}} \mid \theta_{\mathrm{d}}\right) p\left(W_{\mathrm{dn}} \mid Z_{\mathrm{dn}}, \beta\right)\right) d \theta_{\mathrm{d}}
+\end{equation}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">LatentDirichletAllocation</span>
+<span class="n">lda_model</span><span class="o">=</span><span class="n">LatentDirichletAllocation</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">learning_method</span><span class="o">=</span><span class="s1">&#39;online&#39;</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+<span class="c1"># n_components is the number of topics</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lda_top</span><span class="o">=</span><span class="n">lda_model</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">vect_text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lda_top</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># (no_of_doc,no_of_topics)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lda_top</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(54, 10)
+[[0.01737118 0.0173716  0.01737105 0.01737161 0.01737102 0.84365687
+  0.01737133 0.01737125 0.01737292 0.01737116]
+ [0.01445499 0.01445489 0.01445487 0.01445518 0.01445489 0.01445479
+  0.86990462 0.01445497 0.01445526 0.01445554]
+ [0.01825727 0.01825702 0.01825692 0.01825671 0.83568783 0.01825659
+  0.01825685 0.0182566  0.01825743 0.01825678]
+ [0.01441488 0.01441505 0.0144149  0.01441498 0.01441483 0.01441488
+  0.01441458 0.01441486 0.87026633 0.01441471]
+ [0.01882083 0.01882081 0.01882068 0.0188209  0.0188208  0.01882126
+  0.0188207  0.01882049 0.83061278 0.01882075]
+ [0.01586103 0.01586085 0.01586067 0.8572508  0.01586098 0.01586087
+  0.01586109 0.01586088 0.01586192 0.01586091]
+ [0.0151164  0.01511628 0.01511657 0.86395311 0.01511634 0.01511631
+  0.01511634 0.01511633 0.0151162  0.01511612]
+ [0.01613198 0.01613213 0.01613192 0.01613207 0.0161317  0.0161328
+  0.01613203 0.85481114 0.01613212 0.01613212]
+ [0.01653696 0.0165371  0.01653706 0.01653715 0.01653702 0.01653713
+  0.01653729 0.85116565 0.01653698 0.01653766]
+ [0.01514217 0.01514194 0.01514213 0.01514243 0.01514224 0.01514215
+  0.01514213 0.01514265 0.86371965 0.01514251]
+ [0.0160538  0.01605392 0.01605368 0.85551465 0.01605387 0.0160538
+  0.01605433 0.01605382 0.01605402 0.01605411]
+ [0.01260794 0.01260784 0.01260935 0.01260793 0.01260798 0.01260779
+  0.01260785 0.01260788 0.0126078  0.88652765]
+ [0.01635053 0.01635071 0.01635015 0.85284579 0.01635043 0.01635037
+  0.01635055 0.01635059 0.01635051 0.01635036]
+ [0.01736862 0.01736864 0.01736841 0.8436786  0.01736878 0.01736849
+  0.01736878 0.01736903 0.01736876 0.01737189]
+ [0.01497043 0.0149704  0.01497061 0.01497143 0.01497055 0.01497034
+  0.01497058 0.01497048 0.01497051 0.86526467]
+ [0.01308894 0.01308883 0.01308889 0.01308884 0.01308895 0.01308892
+  0.01308927 0.01308895 0.01308892 0.88219949]
+ [0.01411858 0.01411858 0.01411847 0.01411853 0.01411859 0.01411849
+  0.01411859 0.87293244 0.01411898 0.01411874]
+ [0.01537409 0.01537401 0.01537415 0.01537416 0.01537427 0.86163224
+  0.01537412 0.01537422 0.01537436 0.01537437]
+ [0.01583074 0.01583143 0.01583035 0.85752156 0.01583097 0.01583099
+  0.01583095 0.01583096 0.01583101 0.01583104]
+ [0.01692106 0.01692083 0.01692067 0.01692131 0.01692097 0.01692089
+  0.01692086 0.0169211  0.01692154 0.84771078]
+ [0.01571198 0.01571215 0.85859083 0.01571196 0.01571204 0.01571207
+  0.01571216 0.01571243 0.01571214 0.01571223]
+ [0.01633301 0.01633286 0.01633261 0.0163329  0.0163332  0.0163328
+  0.01633283 0.01633294 0.85300349 0.01633337]
+ [0.01786949 0.01786923 0.01786931 0.01786935 0.01786963 0.01786915
+  0.83917532 0.01786942 0.01786949 0.01786962]
+ [0.01291096 0.01291109 0.01291079 0.01291105 0.0129115  0.01291091
+  0.01291108 0.88380076 0.01291097 0.01291089]
+ [0.01531555 0.01531539 0.01531523 0.86215942 0.01531562 0.01531564
+  0.01531567 0.01531556 0.01531565 0.01531626]
+ [0.01690365 0.01690349 0.01690353 0.01690354 0.01690387 0.01690391
+  0.01690385 0.84786611 0.01690426 0.01690378]
+ [0.01588959 0.01588973 0.01588916 0.85699348 0.01588997 0.01588937
+  0.01588959 0.01588981 0.01588968 0.01588963]
+ [0.01374667 0.01374668 0.01374665 0.01374674 0.01374694 0.01374664
+  0.01374655 0.01374665 0.01374665 0.87627985]
+ [0.01598612 0.01598612 0.01598649 0.01598618 0.01598621 0.01598612
+  0.85612496 0.01598591 0.01598605 0.01598584]
+ [0.01798254 0.01798204 0.01798198 0.01798204 0.01798204 0.01798214
+  0.01798213 0.0179818  0.83816126 0.01798203]
+ [0.01554812 0.01554768 0.01554777 0.01554817 0.01554762 0.01554783
+  0.01554765 0.01554795 0.01554794 0.86006927]
+ [0.01730708 0.01730651 0.01730612 0.017307   0.01730671 0.01730657
+  0.84424014 0.01730683 0.01730651 0.01730654]
+ [0.01705617 0.01705641 0.01705627 0.01705636 0.01705634 0.01705635
+  0.01705614 0.01705635 0.01705645 0.84649315]
+ [0.01442737 0.01442739 0.01442719 0.87015282 0.01442713 0.01442736
+  0.0144273  0.01442754 0.01442837 0.01442754]
+ [0.01990391 0.82086582 0.01990378 0.0199035  0.01990351 0.01990361
+  0.01990368 0.01990403 0.01990414 0.01990403]
+ [0.0160842  0.01608396 0.01608394 0.01608407 0.016084   0.85524411
+  0.01608381 0.01608396 0.01608384 0.01608412]
+ [0.01546426 0.0154642  0.01546392 0.01546423 0.01546425 0.01546411
+  0.01546428 0.01546418 0.86082209 0.01546449]
+ [0.85154498 0.01649479 0.01649464 0.01649503 0.01649472 0.01649506
+  0.01649486 0.01649489 0.01649506 0.01649597]
+ [0.01901601 0.01901584 0.01901582 0.0190163  0.01901591 0.01901605
+  0.01901596 0.0190158  0.82885628 0.01901604]
+ [0.02028186 0.02028166 0.02028158 0.02028181 0.02028159 0.81746496
+  0.02028143 0.02028165 0.02028165 0.0202818 ]
+ [0.01453408 0.01453402 0.01453407 0.0145348  0.01453405 0.01453389
+  0.01453407 0.01453418 0.01453414 0.8691927 ]
+ [0.01674649 0.01674617 0.01674615 0.01674626 0.01674652 0.01674632
+  0.01674699 0.01674637 0.01674669 0.84928205]
+ [0.01964459 0.01964545 0.01964404 0.01964438 0.01964457 0.82319892
+  0.01964414 0.01964465 0.01964435 0.01964488]
+ [0.01672495 0.01672738 0.01672477 0.01672558 0.01672449 0.84947378
+  0.0167246  0.0167248  0.01672481 0.01672483]
+ [0.02000824 0.81992538 0.02000799 0.02000815 0.02000836 0.02000793
+  0.02000833 0.02000872 0.0200083  0.0200086 ]
+ [0.0146268  0.01462681 0.01462984 0.01462701 0.01462699 0.01462696
+  0.01462674 0.8683551  0.01462698 0.01462679]
+ [0.0213953  0.02139518 0.02139667 0.02139529 0.02139508 0.02139497
+  0.02139486 0.02139547 0.80744262 0.02139457]
+ [0.01653582 0.01653592 0.01653568 0.01653886 0.01653603 0.01653606
+  0.01653586 0.0165359  0.85117388 0.01653598]
+ [0.01428741 0.01428722 0.01428717 0.01428758 0.01428733 0.01428736
+  0.01428721 0.01428738 0.87141354 0.01428779]
+ [0.01755298 0.01755295 0.01755264 0.01755291 0.84202184 0.01755292
+  0.01755289 0.017553   0.01755471 0.01755318]
+ [0.83838651 0.01795682 0.01795743 0.01795723 0.01795727 0.01795715
+  0.01795681 0.01795682 0.01795695 0.01795702]
+ [0.01242718 0.88815372 0.01242723 0.01242757 0.01242741 0.01242732
+  0.01242726 0.01242777 0.01242726 0.01242729]
+ [0.84399349 0.01733413 0.01733382 0.01733397 0.01733414 0.01733387
+  0.01733408 0.0173341  0.01733434 0.01733406]
+ [0.01364933 0.01364921 0.01364945 0.01364944 0.01364933 0.01364936
+  0.87715578 0.01364925 0.01364961 0.01364924]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sum</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">lda_top</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+  <span class="nb">sum</span><span class="o">=</span><span class="nb">sum</span><span class="o">+</span><span class="n">i</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Perhatikan bahwa nilai pada baris tertentu ditambahkan ke 1. Ini karena setiap nilai menunjukkan % kontribusi topik terkait dalam dokumen.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># composition of doc 0 for eg</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Document 0: &quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">topic</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lda_top</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topic &quot;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s2">&quot;: &quot;</span><span class="p">,</span><span class="n">topic</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span><span class="s2">&quot;%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Document 0: 
+Topic  0 :  1.73711778410479 %
+Topic  1 :  1.7371604484105 %
+Topic  2 :  1.737105434534034 %
+Topic  3 :  1.7371607001360794 %
+Topic  4 :  1.737102498411245 %
+Topic  5 :  84.36568669782066 %
+Topic  6 :  1.7371326461395058 %
+Topic  7 :  1.7371252350514992 %
+Topic  8 :  1.737292182022166 %
+Topic  9 :  1.7371163733695214 %
+</pre></div>
+</div>
+</div>
+</div>
+<p>Seperti yang kita lihat, Topik 7 &amp; 8 dominan ada di dokumen 0.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">lda_model</span><span class="o">.</span><span class="n">components_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lda_model</span><span class="o">.</span><span class="n">components_</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># (no_of_topics*no_of_words)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.87031061 0.82647612 0.81044019 ... 0.92735618 0.7563122  0.84881491]
+ [0.91892652 0.87067828 0.62901976 ... 0.82639945 0.85778517 1.05082196]
+ [0.68888345 0.82668679 0.89760878 ... 0.933666   0.77714309 0.80835125]
+ ...
+ [0.75684544 0.92851578 0.85334304 ... 0.79899816 0.67643373 0.82115471]
+ [0.93761193 0.76222523 0.80687714 ... 0.8931094  0.79560385 0.81931535]
+ [0.75327372 0.76478811 0.93785775 ... 0.87075432 0.69845754 0.72555992]]
+(10, 1000)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Kata-kata paling penting untuk sebuah topik. (katakan 10 kali ini)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># most important words for each topic</span>
+<span class="n">vocab</span> <span class="o">=</span> <span class="n">vect</span><span class="o">.</span><span class="n">get_feature_names</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">comp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lda_model</span><span class="o">.</span><span class="n">components_</span><span class="p">):</span>
+    <span class="n">vocab_comp</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">vocab</span><span class="p">,</span> <span class="n">comp</span><span class="p">)</span>
+    <span class="n">sorted_words</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">vocab_comp</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Topic &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;: &quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">sorted_words</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Topic 0: 
+altman gresik pesan si parsial toko instrumen sociology lingkungan proporsi 
+
+Topic 1: 
+kerja nonfinansial keamanan keywords yustina kepercayaan berpenampilan jalur faktor rm 
+
+Topic 2: 
+88 sejahtera publisitas trunjoyo permai 679 aksesibilitas similarity score pemasaran 
+
+Topic 3: 
+sukses bersifat jupiter sosial meningkat dinas teridiri kartu manajemen 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>soto 
+
+Topic 4: 
+menyebarkan kecuali pengambilan diteliti 00 helmi lamongan menemui peranan klasik 
+
+Topic 5: 
+perusahaan berpenampilan test sample spi 2007 indonesia akuisisi madura kandidat 
+
+Topic 6: 
+liquid pribanus layanan public gerai kehidupan penyedap piutang statistic pesan 
+
+Topic 7: 
+aman jalan influence sampling mengidentifikasi pesan prambon hasilnya kebenaran signifikansi 
+
+Topic 8: 
+split saham produk linier instruktur tingkah kompensasi menginvestasikan hipotesis surya 
+
+Topic 9: 
+harga payout supra variabel such also 64 rm akademik firm 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Untuk memvisualisasikan kata-kata dalam suatu topik dengan lebih baik, kita dapat melihat kata cloud. Untuk setiap topik, 50 kata teratas diplot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span> pip install wordcloud
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: wordcloud in c:\users\windows 10\appdata\local\programs\python\python39\lib\site-packages (1.8.2.2)
+Requirement already satisfied: pillow in c:\users\windows 10\appdata\local\programs\python\python39\lib\site-packages (from wordcloud) (8.1.2)
+Requirement already satisfied: numpy&gt;=1.6.1 in c:\users\windows 10\appdata\local\programs\python\python39\lib\site-packages (from wordcloud) (1.20.1)
+Requirement already satisfied: matplotlib in c:\users\windows 10\appdata\local\programs\python\python39\lib\site-packages (from wordcloud) (3.3.4)
+Requirement already satisfied: python-dateutil&gt;=2.1 in c:\users\windows 10\appdata\local\programs\python\python39\lib\site-packages (from matplotlib-&gt;wordcloud) (2.8.2)
+Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,&gt;=2.0.3 in c:\users\windows 10\appdata\local\programs\python\python39\lib\site-packages (from matplotlib-&gt;wordcloud) (2.4.7)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in c:\users\windows 10\appdata\local\programs\python\python39\lib\site-packages (from matplotlib-&gt;wordcloud) (1.3.1)
+Requirement already satisfied: cycler&gt;=0.10 in c:\users\windows 10\appdata\local\programs\python\python39\lib\site-packages (from matplotlib-&gt;wordcloud) (0.10.0)
+Requirement already satisfied: six in c:\users\windows 10\appdata\local\programs\python\python39\lib\site-packages (from cycler&gt;=0.10-&gt;matplotlib-&gt;wordcloud) (1.16.0)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">wordcloud</span> <span class="kn">import</span> <span class="n">WordCloud</span>
+<span class="c1"># Generate a word cloud image for given topic</span>
+
+<span class="k">def</span> <span class="nf">draw_word_cloud</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
+  <span class="n">imp_words_topic</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+  <span class="n">comp</span><span class="o">=</span><span class="n">lda_model</span><span class="o">.</span><span class="n">components_</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+  <span class="n">vocab_comp</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">vocab</span><span class="p">,</span> <span class="n">comp</span><span class="p">)</span>
+  <span class="n">sorted_words</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">vocab_comp</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[:</span><span class="mi">50</span><span class="p">]</span>
+  <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">sorted_words</span><span class="p">:</span>
+    <span class="n">imp_words_topic</span><span class="o">=</span><span class="n">imp_words_topic</span><span class="o">+</span><span class="s2">&quot; &quot;</span><span class="o">+</span><span class="n">word</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+  <span class="n">wordcloud</span> <span class="o">=</span> <span class="n">WordCloud</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">imp_words_topic</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">wordcloud</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># topic 0</span>
+<span class="n">draw_word_cloud</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/LSA_67_0.png" src="_images/LSA_67_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># topic 1</span>
+<span class="n">draw_word_cloud</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># ...</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/LSA_68_0.png" src="_images/LSA_68_0.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="TFIDF.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">SOAL UAS</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By The Jupyter Book Community<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
